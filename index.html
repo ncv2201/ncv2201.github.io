@@ -3,71 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name | Portfolio</title>
+  <title>Nicole Villegas | Portfolio</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Header & Personal Statement -->
+  <!-- Header & Contact Info -->
   <header>
-    <h1>Your Name</h1>
-    <!-- RUBRIC REQUIREMENT: Clear, impactful 1-sentence introduction (2 pts) -->
-    <p class="personal-statement">
-      A results-driven [Your Title, e.g., Software Developer] passionate about building scalable web applications and solving complex technical problems.
-    </p>
+    <div class="header-container">
+      <h1>Nicole Villegas</h1>
+      <p class="subtitle">Finance & Supply Chain Management | Rutgers Business School</p>
+      
+      <!-- Contact Links -->
+      <div class="contact-links">
+        <a href="mailto:nicole.villegas@rutgers.edu"><i class="fas fa-envelope"></i> Email</a>
+        <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <span><i class="fas fa-map-marker-alt"></i> Basking Ridge, NJ</span>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <!-- Skills Showcase -->
-    <!-- RUBRIC REQUIREMENT: Highlighted skills in an organized format (2 pts) -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>JavaScript (ES6+)</li>
-        <li>Python</li>
-        <li>HTML5 / CSS3</li>
-        <li>React</li>
-        <li>Git & GitHub</li>
-        <li>SQL / Databases</li>
-      </ul>
+  <main class="container">
+
+    <!-- SECTION 1: Personal Statement -->
+    <section id="about" class="card">
+      <h2><i class="fas fa-user-circle"></i> Personal Statement</h2>
+      <p class="personal-statement">
+        Driven Finance and Supply Chain Management double-major at Rutgers Business School with a 3.91 GPA, leveraging analytical precision, budget management expertise, and strong bilingual communication to optimize business operations and drive campus leadership.
+      </p>
     </section>
 
-    <!-- Projects Section -->
-    <!-- RUBRIC REQUIREMENT: 2-3 projects with descriptions and working links (2 pts) -->
-    <section id="projects">
-      <h2>Projects</h2>
+    <!-- SECTION 2: Skills Showcase -->
+    <section id="skills" class="card">
+      <h2><i class="fas fa-tools"></i> Skills & Competencies</h2>
       
-      <div class="project-card">
-        <h3>Project Title One</h3>
-        <p>A web application built using JavaScript and HTML/CSS that allows users to track daily habits and visualize progress over time.</p>
-        <div class="project-links">
-          <a href="https://github.com/username/project-one" target="_blank">GitHub Repo</a>
-          <a href="https://username.github.io/project-one" target="_blank">Live Demo</a>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Business & Financial</h3>
+          <ul>
+            <li>Budget Management & Tracking</li>
+            <li>Invoicing & Expense Monitoring</li>
+            <li>Financial Accounting</li>
+            <li>Business Calculus & Statistics</li>
+          </ul>
         </div>
-      </div>
 
-      <div class="project-card">
-        <h3>Project Title Two</h3>
-        <p>A Python data processing tool that parses API endpoints to generate automated analytical reports.</p>
-        <div class="project-links">
-          <a href="https://github.com/username/project-two" target="_blank">GitHub Repo</a>
-          <a href="https://username.github.io/project-two" target="_blank">Live Demo</a>
+        <div class="skill-category">
+          <h3>Leadership & Operations</h3>
+          <ul>
+            <li>Outreach & Marketing Strategies</li>
+            <li>Data Entry & Document Prep</li>
+            <li>Inventory & Charts Management</li>
+            <li>Customer & Student Relations</li>
+          </ul>
         </div>
-      </div>
 
-      <div class="project-card">
-        <h3>Project Title Three</h3>
-        <p>A mobile-responsive web app designed for managing personal tasks with persistent local storage.</p>
-        <div class="project-links">
-          <a href="https://github.com/username/project-three" target="_blank">GitHub Repo</a>
-          <a href="https://username.github.io/project-three" target="_blank">Live Demo</a>
+        <div class="skill-category">
+          <h3>Certifications & Languages</h3>
+          <ul>
+            <li>Bilingual: English & Spanish</li>
+            <li>NJ Seal of Biliteracy</li>
+            <li>CPR / First Aid Certified</li>
+          </ul>
         </div>
       </div>
     </section>
+
+    <!-- SECTION 3: Projects & Leadership Showcase -->
+    <section id="projects" class="card">
+      <h2><i class="fas fa-briefcase"></i> Key Projects & Leadership</h2>
+      
+      <div class="projects-list">
+
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3>CASA Semester Budget & Financial Tracker</h3>
+            <span class="tag">Finance Project</span>
+          </div>
+          <p>
+            Managed and allocated the complete semester budget for the Colombian American Student Association at Rutgers[cite: 1]. Processed invoices, tracked expenses to prevent overruns, and maintained audit-ready financial records adhering to university guidelines[cite: 1].
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/your-username/casa-budget-tracker" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3>Career Exploration & Student Outreach Initiative</h3>
+            <span class="tag">Marketing & Operations</span>
+          </div>
+          <p>
+            Developed and deployed targeted outreach initiatives to boost student awareness and engagement for career services at Rutgers[cite: 1]. Utilized data-driven strategies to improve campus resource accessibility and track participation metrics[cite: 1].
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/your-username/student-outreach-analysis" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card">
+          <div class="project-header">
+            <h3>Montessori Administrative & Inventory System</h3>
+            <span class="tag">Supply Chain & Operations</span>
+          </div>
+          <p>
+            Organized classroom operations, managed inventory charts, and handled precise financial administrative tasks at Albrook Montessori School to ensure efficient daily resource distribution[cite: 1].
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/your-username/montessori-inventory-log" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    <p>&copy; 2026 Your Name</p>
+    <p>&copy; 2026 Nicole Villegas • Built with HTML & CSS on GitHub Pages</p>
   </footer>
 
 </body>
