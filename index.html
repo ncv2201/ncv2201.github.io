@@ -1,131 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nicole Villegas | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      /* Deep Navy Blue Color Palette */
+      --bg-dark: #070b19;          /* Midnight Navy Base */
+      --bg-navy-card: rgba(18, 30, 61, 0.65); /* Glass Navy Card */
+      --card-border: rgba(91, 124, 172, 0.18);
+      --card-border-hover: rgba(79, 172, 254, 0.45);
+      
+      /* Vibrant Navy & Accent Colors */
+      --accent-navy-bright: #1c3d72;
+      --accent-blue-glow: #00f2fe;   /* Electric Cyan Accent */
+      --accent-blue-secondary: #4facfe; /* Steel Blue Light */
+      --accent-gold: #f59e0b;       /* Subtle Gold Accent for GPA/Honors */
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Navy Background Ambient Glows */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.35;
+      animation: pulseGlow 12s infinite alternate ease-in-out;
+    }
+
+    .glow-1 {
+      top: -10%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #0f2b5c 0%, transparent 75%);
+    }
+
+    .glow-2 {
+      bottom: 10%;
+      right: -10%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, #0052d4 0%, transparent 75%);
+      animation-delay: -6s;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.3; }
+      100% { transform: scale(1.15) translate(30px, -20px); opacity: 0.5; }
+    }
+
+    /* Container Structure */
+    .max-w-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: var(--bg-navy-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: 0 12px 35px -10px rgba(0, 242, 254, 0.15);
+      transform: translateY(-4px);
+    }
+
+    header.hero {
+      padding: 4.5rem 0 3rem;
+      position: relative;
+    }
+
+    .hero-layout {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero-layout {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 2rem;
+      }
+    }
+
+    .hero-text-content {
+      flex: 1;
+    }
+
+    /* Headshot Styling */
+    .headshot-wrapper {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      flex-shrink: 0;
+    }
+
+    .headshot-border-glow {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue-secondary), var(--accent-blue-glow), #0052d4);
+      filter: blur(8px);
+      opacity: 0.7;
+      animation: rotateGlow 8s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .headshot-img-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      background-color: #111a33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .headshot-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .headshot-placeholder-icon {
+      font-size: 5rem;
+      color: #385382;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(79, 172, 254, 0.12);
+      border: 1px solid rgba(79, 172, 254, 0.3);
+      color: #90e0ef;
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .badge-pill i {
+      color: var(--accent-blue-glow);
+      font-size: 0.85rem;
+    }
+
+    h1.hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      color: #cbd5e1;
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    .hero-subtitle span {
+      color: var(--accent-blue-glow);
+      font-weight: 600;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 850px) {
+      .btn-group { justify-content: center; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0052d4 0%, #4facfe 100%);
+      color: white;
+      box-shadow: 0 4px 20px rgba(79, 172, 254, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Metric Cards Grid */
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: rgba(11, 22, 48, 0.6);
+      border: 1px solid var(--card-border);
+      padding: 1.2rem;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      background: rgba(79, 172, 254, 0.15);
+      color: var(--accent-blue-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .stat-lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title i {
+      color: var(--accent-blue-glow);
+    }
+
+    .statement-card {
+      background: linear-gradient(135deg, rgba(15, 43, 92, 0.4) 0%, rgba(11, 22, 48, 0.8) 100%);
+      border-left: 4px solid var(--accent-blue-glow);
+      position: relative;
+    }
+
+    .statement-quote {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-weight: 400;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-cat-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tag:hover {
+      background: rgba(0, 242, 254, 0.15);
+      border-color: rgba(0, 242, 254, 0.4);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .project-top {
+      margin-bottom: 1.5rem;
+    }
+
+    .project-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(0, 242, 254, 0.12);
+      color: var(--accent-blue-glow);
+      margin-bottom: 0.9rem;
+    }
+
+    .project-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .project-link-btn {
+      font-size: 0.85rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+    }
+
+    .edu-banner {
+      background: linear-gradient(135deg, rgba(15, 30, 65, 0.8) 0%, rgba(20, 40, 85, 0.5) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .edu-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-info p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .courses-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-width: 600px;
+    }
+
+    .course-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+      color: #94a3b8;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    footer {
+      padding: 3rem 0;
+      margin-top: 4rem;
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .social-icons a {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent-blue-glow);
+    }
+
+    .section-spacing {
+      margin-top: 3.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .glass-card { padding: 1.5rem; }
+      header.hero { padding: 3rem 0 2rem; }
+      .quick-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header & Contact Info -->
-  <header>
-    <div class="header-container">
-      <h1>Nicole Villegas</h1>
-      <p class="subtitle">Finance & Supply Chain Management | Rutgers Business School</p>
-      
-      <!-- Contact Links -->
-      <div class="contact-links">
-        <a href="mailto:nicole.villegas@rutgers.edu"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <span><i class="fas fa-map-marker-alt"></i> Basking Ridge, NJ</span>
-      </div>
-    </div>
-  </header>
+  <!-- Background Ambient Glow Orbs -->
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
 
-  <main class="container">
+  <div class="max-w-container">
 
-    <!-- SECTION 1: Personal Statement -->
-    <section id="about" class="card">
-      <h2><i class="fas fa-user-circle"></i> Personal Statement</h2>
-      <p class="personal-statement">
-        Driven Finance and Supply Chain Management double-major at Rutgers Business School with a 3.91 GPA, leveraging analytical precision, budget management expertise, and strong bilingual communication to optimize business operations and drive campus leadership.
-      </p>
-    </section>
+    <header class="hero">
+      <div class="hero-layout">
+        
+        <!-- Text Info -->
+        <div class="hero-text-content">
+          <div class="badge-pill">
+            <i class="fas fa-graduation-cap"></i> Rutgers Business School • GPA 3.91
+          </div>
 
-    <!-- SECTION 2: Skills Showcase -->
-    <section id="skills" class="card">
-      <h2><i class="fas fa-tools"></i> Skills & Competencies</h2>
-      
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Business & Financial</h3>
-          <ul>
-            <li>Budget Management & Tracking</li>
-            <li>Invoicing & Expense Monitoring</li>
-            <li>Financial Accounting</li>
-            <li>Business Calculus & Statistics</li>
-          </ul>
+          <h1 class="hero-title">Nicole Villegas</h1>
+          <p class="hero-subtitle">
+            Double Major in <span>Finance</span> & <span>Supply Chain Management</span>
+          </p>
+
+          <div class="btn-group">
+            <a href="mailto:nicole.villegas@rutgers.edu" class="btn btn-primary">
+              <i class="fas fa-envelope"></i> Contact Me
+            </a>
+            <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank" class="btn btn-secondary">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/nicolevillegas" target="_blank" class="btn btn-secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
         </div>
 
-        <div class="skill-category">
-          <h3>Leadership & Operations</h3>
-          <ul>
-            <li>Outreach & Marketing Strategies</li>
-            <li>Data Entry & Document Prep</li>
-            <li>Inventory & Charts Management</li>
-            <li>Customer & Student Relations</li>
-          </ul>
+        <!-- HEADSHOT CONTAINER -->
+        <!-- NOTE: Replace 'assets/headshot.jpg' below with the actual path or URL to your photo! -->
+        <div class="headshot-wrapper">
+          <div class="headshot-border-glow"></div>
+          <div class="headshot-img-container">
+            <img 
+              src="assets/headshot.jpg" 
+              alt="Nicole Villegas Headshot" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x400/0b1630/4facfe?text=NV';" 
+            />
+          </div>
         </div>
 
-        <div class="skill-category">
-          <h3>Certifications & Languages</h3>
-          <ul>
-            <li>Bilingual: English & Spanish</li>
-            <li>NJ Seal of Biliteracy</li>
-            <li>CPR / First Aid Certified</li>
-          </ul>
+      </div>
+
+      <!-- Quick Stats Metrics -->
+      <div class="quick-stats" style="margin-top: 2.5rem;">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-award"></i></div>
+          <div>
+            <div class="stat-val">3.912</div>
+            <div class="stat-lbl">Cumulative GPA</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-language"></i></div>
+          <div>
+            <div class="stat-val">Bilingual</div>
+            <div class="stat-lbl">English & Spanish</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+          <div>
+            <div class="stat-val">NJ Seal</div>
+            <div class="stat-lbl">Biliteracy Certified</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-heartbeat"></i></div>
+          <div>
+            <div class="stat-val">CPR Certified</div>
+            <div class="stat-lbl">First Aid Qualified</div>
+          </div>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- SECTION 3: Projects & Leadership Showcase -->
-    <section id="projects" class="card">
-      <h2><i class="fas fa-briefcase"></i> Key Projects & Leadership</h2>
-      
-      <div class="projects-list">
-
-        <!-- Project 1 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3>CASA Semester Budget & Financial Tracker</h3>
-            <span class="tag">Finance Project</span>
-          </div>
-          <p>
-            Managed and allocated the complete semester budget for the Colombian American Student Association at Rutgers[cite: 1]. Processed invoices, tracked expenses to prevent overruns, and maintained audit-ready financial records adhering to university guidelines[cite: 1].
+    <main>
+      <section id="statement" class="section-spacing">
+        <h2 class="section-title">
+          <i class="fas fa-user-circle"></i> Personal Statement
+        </h2>
+        <div class="glass-card statement-card">
+          <p class="statement-quote">
+            "Driven Finance and Supply Chain Management double-major at Rutgers Business School with a 3.91 GPA, leveraging analytical precision, budget management expertise, and strong bilingual communication to optimize business operations and drive campus leadership."
           </p>
-          <div class="project-links">
-            <a href="https://github.com/your-username/casa-budget-tracker" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
-          </div>
-        </article>
+        </div>
+      </section>
 
-        <!-- Project 2 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3>Career Exploration & Student Outreach Initiative</h3>
-            <span class="tag">Marketing & Operations</span>
+      <section id="skills" class="section-spacing">
+        <h2 class="section-title">
+          <i class="fas fa-lightbulb"></i> Skills & Capabilities
+        </h2>
+        
+        <div class="skills-grid">
+          <div class="glass-card">
+            <div class="skill-cat-title">
+              <i class="fas fa-chart-line" style="color: var(--accent-blue-glow)"></i>
+              Business & Finance
+            </div>
+            <div class="tag-cloud">
+              <span class="tag"><i class="fas fa-calculator"></i> Budget Management</span>
+              <span class="tag"><i class="fas fa-file-invoice-dollar"></i> Expense Auditing</span>
+              <span class="tag"><i class="fas fa-chart-pie"></i> Financial Accounting</span>
+              <span class="tag"><i class="fas fa-square-root-variable"></i> Business Calculus</span>
+              <span class="tag"><i class="fas fa-chart-bar"></i> Statistics & Analytics</span>
+            </div>
           </div>
-          <p>
-            Developed and deployed targeted outreach initiatives to boost student awareness and engagement for career services at Rutgers[cite: 1]. Utilized data-driven strategies to improve campus resource accessibility and track participation metrics[cite: 1].
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/your-username/student-outreach-analysis" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
-          </div>
-        </article>
 
-        <!-- Project 3 -->
-        <article class="project-card">
-          <div class="project-header">
-            <h3>Montessori Administrative & Inventory System</h3>
-            <span class="tag">Supply Chain & Operations</span>
+          <div class="glass-card">
+            <div class="skill-cat-title">
+              <i class="fas fa-cogs" style="color: var(--accent-blue-secondary)"></i>
+              Operations & Leadership
+            </div>
+            <div class="tag-cloud">
+              <span class="tag"><i class="fas fa-boxes-packing"></i> Inventory Tracking</span>
+              <span class="tag"><i class="fas fa-bullhorn"></i> Outreach Strategies</span>
+              <span class="tag"><i class="fas fa-users"></i> Event Collaboration</span>
+              <span class="tag"><i class="fas fa-database"></i> Data Entry & Docs</span>
+              <span class="tag"><i class="fas fa-tasks"></i> Project Management</span>
+            </div>
           </div>
-          <p>
-            Organized classroom operations, managed inventory charts, and handled precise financial administrative tasks at Albrook Montessori School to ensure efficient daily resource distribution[cite: 1].
-          </p>
-          <div class="project-links">
-            <a href="https://github.com/your-username/montessori-inventory-log" target="_blank" class="btn"><i class="fab fa-github"></i> View Repository</a>
-          </div>
-        </article>
 
+          <div class="glass-card">
+            <div class="skill-cat-title">
+              <i class="fas fa-globe" style="color: var(--accent-gold)"></i>
+              Competencies & Badges
+            </div>
+            <div class="tag-cloud">
+              <span class="tag"><i class="fas fa-comments"></i> Professional Spanish</span>
+              <span class="tag"><i class="fas fa-stamp"></i> NJ Biliteracy Seal</span>
+              <span class="tag"><i class="fas fa-kit-medical"></i> CPR / First Aid</span>
+              <span class="tag"><i class="fas fa-handshake"></i> Client Relations</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section-spacing">
+        <h2 class="section-title">
+          <i class="fas fa-folder-open"></i> Featured Projects & Experience
+        </h2>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="glass-card project-card">
+            <div class="project-top">
+              <span class="project-badge">Finance & Budgeting</span>
+              <h3 class="project-title">CASA Financial & Budget Management</h3>
+              <p class="project-desc">
+                Oversee and allocate semester budget operations for the Colombian American Student Association at Rutgers. Processed invoices, tracked expenses to avoid overruns, and maintained precise university-compliant financial logs.
+              </p>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/nicolevillegas" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fab fa-github"></i> Repository
+              </a>
+              <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fas fa-external-link-alt"></i> Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="glass-card project-card">
+            <div class="project-top">
+              <span class="project-badge" style="background: rgba(79, 172, 254, 0.15); color: #70c1ff;">Outreach & Marketing</span>
+              <h3 class="project-title">Career Exploration & Student Outreach</h3>
+              <p class="project-desc">
+                Designed and implemented marketing initiatives for Rutgers Career Exploration and Success to increase awareness and engagement for campus career resources across student organizations.
+              </p>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/nicolevillegas" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fab fa-github"></i> Repository
+              </a>
+              <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fas fa-external-link-alt"></i> Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="glass-card project-card">
+            <div class="project-top">
+              <span class="project-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Supply Chain & Logistics</span>
+              <h3 class="project-title">Albrook Operations & Inventory System</h3>
+              <p class="project-desc">
+                Managed inventory tracking, administrative workflows, charts, and basic financial support at Albrook Montessori School, ensuring smooth daily resource distribution and scheduling.
+              </p>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/nicolevillegas" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fab fa-github"></i> Repository
+              </a>
+              <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank" class="btn btn-secondary project-link-btn">
+                <i class="fas fa-external-link-alt"></i> Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-spacing">
+        <div class="edu-banner">
+          <div class="edu-info">
+            <h3>Rutgers, The State University of New Jersey</h3>
+            <p>Rutgers Business School • Anticipated Graduation: May 2029</p>
+          </div>
+          <div class="courses-pills">
+            <span class="course-chip">Intro to Marketing</span>
+            <span class="course-chip">Supply Chain Mgmt</span>
+            <span class="course-chip">Financial Accounting</span>
+            <span class="course-chip">Macro / Micro Economics</span>
+            <span class="course-chip">Management Skills</span>
+            <span class="course-chip">Statistics I</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="social-icons">
+          <a href="mailto:nicole.villegas@rutgers.edu" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/nicolevillegas0301" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/nicolevillegas" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2026 Nicole Villegas • Rutgers Business School</p>
       </div>
-    </section>
+    </footer>
 
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Nicole Villegas • Built with HTML & CSS on GitHub Pages</p>
-  </footer>
+  </div>
 
 </body>
 </html>
